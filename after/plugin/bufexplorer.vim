@@ -8,9 +8,8 @@ function! SaferBufExplorer()
     endif 
 endfunction
 
-let g:bufExplorerDefaultHelp = 0
-let g:bufExplorerDisableDefaultKeyMapping = 1
 let g:bufExplorerShowRelativePath = 1
 
+" Default mappings are ignored in .vim/plugin/bufexplorer.vim
 noremap <silent> <leader>bb :call SaferBufExplorer()<cr>
 noremap <silent> <leader>bs :BufExplorerHorizontalSplit<cr>

@@ -48,8 +48,6 @@ noremap Y y$
 " Uppercase the word under cursor
 inoremap <c-u> <esc>viwUea
 
-" Clear current line
-noremap <leader>cc cc<esc>
 
 " Disable devilish mappings
 noremap Q <nop>

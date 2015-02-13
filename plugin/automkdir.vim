@@ -1,6 +1,12 @@
+function! WriteWithPreAndPost()
+    doautocmd BufWritePre
+    write
+    doautocmd BufWritePost
+endfunction
+
 function! AutoMkdir(path)
     if isdirectory(a:path)
-        write | return
+        call WriteWithPreAndPost() | return
     endif
 
     let prompt = "Directory " . a:path . " is missing. Create it?"
@@ -8,14 +14,11 @@ function! AutoMkdir(path)
 
     let response = nr2char(getchar())
     if response ==? "y"
-        call mkdir(a:path, "p") | write
+        call mkdir(a:path, "p") | call WriteWithPreAndPost()
     endif
 endfunction
 
 augroup automkdir
     autocmd!
-    autocmd BufWriteCmd *
-                \ doautocmd BufWritePre |
-                \ call AutoMkdir(expand("<afile>:p:h")) |
-                \ doautocmd BufWritePost
+    autocmd BufWriteCmd * call AutoMkdir(expand("<afile>:p:h"))
 augroup END

@@ -61,6 +61,8 @@ noremap <leader>hh :set hlsearch! hlsearch?<cr>
 noremap <leader>ev :split + $MYVIMRC<cr>
 noremap <leader>sv :source $MYVIMRC<cr>
 
+" Puts dirctory of current working file on command line
+cnoremap <leader>fd <c-r>=expand("%:h")<cr>/
 
 if &diff
     noremap dq :qall<cr>

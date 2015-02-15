@@ -1,5 +1,3 @@
-noremap <silent> <leader>ee :Errors<cr>
-
 " C++
 let g:syntastic_cpp_compiler = "clang++"
 let g:syntastic_cpp_compiler_options = "-Wall -std=c++11"

@@ -1,10 +1,14 @@
-let g:NERDSpaceDelims=1
+let g:NERDSpaceDelims = 1
 
-nnoremap <leader>cl :call NERDComment("n", "alignleft")<cr>
-xnoremap <leader>cl :call NERDComment("x", "alignleft")<cr>
 
-nnoremap <leader>cu :call NERDComment("n", "uncomment")<cr>
-xnoremap <leader>cu :call NERDComment("x", "uncomment")<cr>
+function! s:NERDCommenterMap(keys, function)
+    for mode in ["n", "x"]
+        let map = mode . "noremap"
+        let command = ":call NERDComment(\"" . mode . "\", \"" . a:function . "\")"
+        execute join([map, a:keys, command, "<cr>"], " ")
+    endfor
+endfunction
 
-nnoremap <leader>cy :call NERDComment("n", "yank")<cr>
-xnoremap <leader>cy :call NERDComment("x", "yank")<cr>
+call s:NERDCommenterMap("<leader>cl", "alignleft")
+call s:NERDCommenterMap("<leader>cu", "uncomment")
+call s:NERDCommenterMap("<leader>cy", "yank")

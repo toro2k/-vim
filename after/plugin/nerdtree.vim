@@ -1,1 +1,1 @@
-noremap <silent> <leader>df :NERDTreeFind<cr>
+noremap <silent> <leader>ed :edit %:h<cr>

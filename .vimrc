@@ -77,8 +77,3 @@ augroup misc
     " Turn on sql ftplugin when edit files from MySQL client
     autocmd BufRead /tmp/sql* setfiletype sql
 augroup END
-
-
-if filereadable(expand("~/.vim/typos.vim"))
-    source ~/.vim/typos.vim
-endif

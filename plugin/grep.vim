@@ -2,9 +2,7 @@ if executable("ack-grep")
     set grepprg=ack-grep\ --no-color
 endif
 
-" function! Grep(arguments)
-"     silent execute ":grep " . a:arguments
-"     copen
-" endfunction
+command! -nargs=+ -complete=file Grep silent execute "grep <args>" | copen 20
 
-command! -nargs=+ -complete=file Grep silent execute "grep <args>" | copen
+" Grep word under cursor
+noremap <leader>* :execute "Grep <c-r><c-w>"<cr>

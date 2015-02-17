@@ -25,3 +25,6 @@ setlocal foldexpr=QuickfixFoldExpr()
 setlocal foldtext=QuickfixFoldText()
 
 setlocal nowrap
+
+noremap <buffer> o zo
+noremap <buffer> c zc

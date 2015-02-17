@@ -37,6 +37,10 @@ set colorcolumn=80
 colorscheme toro2k
 
 
+command! EditVimrc split + $MYVIMRC
+command! SourceVimrc source $MYVIMRC
+
+
 noremap j gj
 noremap k gk
 
@@ -57,9 +61,6 @@ noremap q: <nop>
 
 noremap <silent> <leader>bd :bdelete<cr>
 noremap <leader>hh :set hlsearch! hlsearch?<cr>
-
-noremap <leader>ev :split + $MYVIMRC<cr>
-noremap <leader>sv :source $MYVIMRC<cr>
 
 " Puts dirctory of current working file on command line
 cnoremap <leader>fd <c-r>=expand("%:h")<cr>/

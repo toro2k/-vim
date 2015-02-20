@@ -23,6 +23,8 @@ set smarttab
 
 set incsearch
 set hlsearch
+
+set ignorecase
 set smartcase
 
 set showcmd

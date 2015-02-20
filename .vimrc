@@ -9,6 +9,8 @@ execute pathogen#infect()
 syntax on
 filetype plugin indent on
 
+colorscheme toro2k
+
 
 set autoread
 set scrolloff=3
@@ -20,9 +22,10 @@ set softtabstop=4
 set smarttab
 
 set incsearch
-set ignorecase
-set smartcase
 set hlsearch
+set smartcase
+
+set showcmd
 
 set nobackup
 set nowritebackup
@@ -34,11 +37,10 @@ set clipboard=unnamedplus,exclude:cons\|linux
 
 set colorcolumn=80
 
-colorscheme toro2k
-
 
 command! EditVimrc split + $MYVIMRC
 command! SourceVimrc source $MYVIMRC
+command! ClearSearchPatternRegister let @/ = ""
 
 
 noremap j gj
@@ -55,20 +57,18 @@ noremap <leader>cc cc<esc>
 " Uppercase the word under cursor
 inoremap <c-u> <esc>viwUea
 
+noremap <silent> <c-p> :cprev<cr>
+noremap <silent> <c-n> :cnext<cr>
+
 " Disable devilish mappings
 noremap Q <nop>
 noremap q: <nop>
 
 noremap <silent> <leader>bd :bdelete<cr>
-noremap <leader>hh :set hlsearch! hlsearch?<cr>
+noremap <silent> <leader>hh :ClearSearchPatternRegister<cr>
 
 " Puts dirctory of current working file on command line
 cnoremap <leader>fd <c-r>=expand("%:h")<cr>/
-
-if &diff
-    noremap dq :qall<cr>
-    syntax off
-endif
 
 
 augroup misc

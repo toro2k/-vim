@@ -33,6 +33,8 @@ set nobackup
 set nowritebackup
 set noswapfile
 
+set display=lastline
+
 set wildmode=list:longest,full
 
 set clipboard=unnamedplus,exclude:cons\|linux

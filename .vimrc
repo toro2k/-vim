@@ -45,6 +45,7 @@ set colorcolumn=80
 command! EditVimrc split + $MYVIMRC
 command! SourceVimrc source $MYVIMRC
 command! ClearSearchPatternRegister let @/ = ""
+command! -nargs=1 -complete=file Split botright split <args>
 
 
 noremap j gj

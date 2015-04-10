@@ -41,9 +41,12 @@ set clipboard=unnamedplus,exclude:cons\|linux
 
 set colorcolumn=80
 
+set tildeop
+
 
 command! EditVimrc split + $MYVIMRC
 command! SourceVimrc source $MYVIMRC
+command! Mkdir call mkdir(expand("%:h"), "p")
 command! ClearSearchPatternRegister let @/ = ""
 command! -nargs=1 -complete=file Split botright split <args>
 
@@ -71,6 +74,9 @@ noremap q: <nop>
 
 noremap <silent> <leader>bd :bdelete<cr>
 noremap <silent> <leader>hh :ClearSearchPatternRegister<cr>
+
+noremap <leader>s ciw<space><esc>
+noremap <leader>: :<c-f>
 
 " Puts dirctory of current working file on command line
 cnoremap <leader>fd <c-r>=expand("%:h")<cr>/

@@ -13,6 +13,7 @@ function! Rdb(function)
 endfunction
 
 noremap <silent> <leader>dd :call Rdb("toggle_breakpoint")<cr>
+noremap <silent> <leader>dx :call Rdb("remove_breakpoints")<cr>
 noremap <silent> <leader>dl :call Rdb("open_breakpoints")<cr>
 noremap <silent> <leader>dn :call Rdb("next")<cr>
 noremap <silent> <leader>ds :call Rdb("step")<cr>

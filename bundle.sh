@@ -1,29 +1,36 @@
 #!/bin/sh
 
-BUNDLE_DIR="${PWD}/bundle"
-BUNDLE_LIST="${PWD}/bundle.list"
-
-if [ ! -r "$BUNDLE_LIST" ]; then
-    printf "${BUNDLE_LIST} is not readable\n" 2>&1
+if [ $# -ne 1 ]; then
+    echo "usage: ${0} VIMFILES" 2>&1
     exit 1
 fi
 
-if [ ! -d "$BUNDLE_DIR" ]; then
-    mkdir -p "$BUNDLE_DIR"
+vimfiles=$(realpath $1)
+
+bundle_dir="${vimfiles}/bundle"
+bundle_list="${vimfiles}/bundle.list"
+
+if [ ! -r "$bundle_list" ]; then
+    printf "${bundle_list} is not readable\n" 2>&1
+    exit 1
 fi
 
-# Now I'm fairly sure I'm in the right directory
-
+if [ ! -d "$bundle_dir" ]; then
+    mkdir -p "$bundle_dir"
+fi
 
 while read plugin_url; do
     plugin_name=$(basename "$plugin_url" ".git")
-    plugin_path="${BUNDLE_DIR}/${plugin_name}"
+    plugin_path="${bundle_dir}/${plugin_name}"
 
-    printf "\033[01;34m${plugin_name}\033[0m: "
+    printf "[01;34m${plugin_name}[0m: "
 
     if [ ! -d "$plugin_path" ]; then
         git clone "$plugin_url" "$plugin_path"
     else
-        printf "already installed\n" # maybe update it
+        printf "already installed. Updating...\n"
+        cd "$plugin_path"
+        git pull
+        cd - > /dev/null
     fi
-done < "$BUNDLE_LIST"
+done < "$bundle_list"

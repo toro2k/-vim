@@ -1,28 +1,32 @@
 #!/bin/sh
 
-rm_if_readable() {
-    [ -r "$1" ] && rm -i "$1"
-}
+SCRIPT_NAME=$(basename "$0")
+VIM_DIR="$HOME/.vim"
 
-link_if_not_exists() {
-    [ -e "$2" ] || ln -sf "$1" "$2"
-}
+FORCE=0
+if [ "$1" = "-f" ]; then
+    FORCE=1
+    shift
+fi
 
-if [ $# -ne 1 ]; then
-    echo "usage: ${0} VIMFILES" 2>&1
+if [ ! -d "$VIM_DIR" ]; then
+    echo "$VIM_DIR is missing!" 2>&1
     exit 1
 fi
 
-vimfiles=$(realpath $1)
+for FILE in ".vimrc" ".gvimrc"; do
+    TARGET="$VIM_DIR/$FILE"
+    LINK_NAME="$HOME/$FILE"
 
-rm_if_readable "${HOME}/.vim"
-rm_if_readable "${HOME}/.vimrc"
-rm_if_readable "${HOME}/.gvimrc"
+    if [ ! -r "$TARGET" ]; then
+        echo "$TARGET is missing!" 2>&1
+        exit 1
+    fi
 
-link_if_not_exists "$vimfiles" "${HOME}/.vim"
-link_if_not_exists "$vimfiles/vimrc" "${HOME}/.vimrc"
-link_if_not_exists "$vimfiles/gvimrc" "${HOME}/.gvimrc"
+    if [ -a "$LINK_NAME" -a "$FORCE" -eq 0 ]; then
+        echo "$TARGET already exists!" 2>&1
+        exit 1
+    fi
 
-if [ -x "${vimfiles}/bundle.sh" ]; then
-    "${vimfiles}/bundle.sh" "$vimfiles"
-fi
+    ln -sf "$TARGET" "$LINK_NAME"
+done

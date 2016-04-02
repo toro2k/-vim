@@ -1,5 +1,7 @@
 runtime colors/vividchalk.vim
 
+let colors_name = "toro2k"
+
 hi Normal  guibg=#2e3436
 hi NonText guifg=#555753
 

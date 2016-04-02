@@ -23,7 +23,7 @@ for FILE in ".vimrc" ".gvimrc"; do
         exit 1
     fi
 
-    if [ -a "$LINK_NAME" -a "$FORCE" -eq 0 ]; then
+    if [ -e "$LINK_NAME" -a "$FORCE" -eq 0 ]; then
         echo "$TARGET already exists!" 2>&1
         exit 1
     fi

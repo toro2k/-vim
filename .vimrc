@@ -39,10 +39,11 @@ set wildmode=list:longest,full
 
 set clipboard=unnamedplus,exclude:cons\|linux
 
-set colorcolumn=80
+set colorcolumn=80,100
 
 set tildeop
 
+set nowrap
 
 command! EditVimrc split + $MYVIMRC
 command! SourceVimrc source $MYVIMRC
